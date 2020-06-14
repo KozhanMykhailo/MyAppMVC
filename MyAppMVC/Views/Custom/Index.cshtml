@@ -1,10 +1,47 @@
 ﻿
+@model IEnumerable<MyAppMVC.Models.Team>
 @{
-    ViewBag.Title = "Custom.Index()";
+    ViewBag.Title = "Команды";
+    Layout = null;
 }
 
-<h2>Index</h2>
-<div class="customClassDiv"> 
-    <p>Index() Custom</p>
-</div>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/MyCustomCss.css" rel="stylesheet" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <h2>Список команд которые существуют в базе</h2>
+    <div class="liteDiv">
+        <p> @Html.ActionLink("Вернуться к MyPage", "MyPage", "Custom", new { @class = "btn btn-primary" }) </p>
+    </div>
+    <div class="customClassDiv">
+        <p>Список : </p>
+        <div class="tableDiv">
+            <table class="table table-striped" border="1">
+                <tr>
+                    <th>Город</th>
+                    <th>Название команды</th>
+                </tr>
+                @foreach (MyAppMVC.Models.Team t in Model.OrderBy(o => o.TeamName))
+                {
+                    <tr>
+                        <td>
+                            @t.City
+                        </td>
+                        <td>
+                            @t.TeamName
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

@@ -1,8 +1,6 @@
 ﻿
 @{
     ViewBag.Title = "Передается в закладку Браузера";
-   // Layout = null;
-
 }
 
 <!DOCTYPE html>
@@ -15,14 +13,38 @@
     <title>@ViewBag.Title</title>
 </head>
 <body>
-    <h2>MyPage</h2>
-    <div class="customControllerDiv">
-        <p>@Html.ActionLink("Перейти на страницу по умолчанию в контроллере Custom", "Index", "Custom")</p>
+    <div class="liteDiv">
+        <h2>MyPage</h2>
+        <table border="1">
+            <tr>
+                <td>
+                    <div class="customControllerDiv">
+                        <p>Способы создания links - Перейти к списку футбольных комманд( на страницу по умолчанию в контроллере Custom)</p>
+                        <a href="@Url.Action("Index", "Custom")"><span>Url.Action</span></a>
+                        <p>@Html.ActionLink("Html.ActionLink", "Index", "Custom")</p>
+                        <p> @Html.ActionLink("Bootstrap", "Index", "Custom", new { @class = "btn btn-primary" }) </p>
+                    </div>
+                </td>
+                <td>
+                    <div class="defaultDiv">
+                        <p><h2>to be continued</h2></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="defaultDiv">
+                        <p><h2>to be continued</h2></p>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
-    <div>
+    <div class="defaultDiv">
         <p>First code in file</p>
     </div>
-    
+
+
 </body>
 </html>
 
