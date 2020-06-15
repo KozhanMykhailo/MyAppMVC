@@ -20,9 +20,17 @@
                 <td>
                     <div class="customControllerDiv">
                         <p>Способы создания links - Перейти к списку футбольных комманд( на страницу по умолчанию в контроллере Custom)</p>
-                        <a href="@Url.Action("Index", "Custom")"><span>Url.Action</span></a>
-                        <p>@Html.ActionLink("Html.ActionLink", "Index", "Custom")</p>
-                        <p> @Html.ActionLink("Bootstrap", "Index", "Custom", new { @class = "btn btn-primary" }) </p>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a href="@Url.Action("Index", "Custom")"><span>Url.Action</span></a>
+                            </li>
+                            <li class="list-group-item">
+                                <p>@Html.ActionLink("Html.ActionLink", "Index", "Custom")</p>
+                            </li>
+                            <li class="list-group-item">
+                                <p> @Html.ActionLink("Html.ActionLink + Bootstrap", "Index", "Custom", new { @class = "btn btn-primary" }) </p>
+                            </li>
+                        </ul>
                     </div>
                 </td>
                 <td>

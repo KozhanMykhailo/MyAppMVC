@@ -15,16 +15,12 @@ namespace MyAppMVC.Controllers
             ViewBag.Message = "Это находится в контроллере Custom метод Index";
             using (MatchesContext db = new MatchesContext())
             {
-                var users = db.Players;
-                var teams = db.Teams;
-                var gemaplayers = db.GemaPlayers;
-                var matches = db.Matches;
-                List<Team> lt = new List<Team>();
-                foreach (var item in teams)
+                List<Team> models = new List<Team>();
+                foreach (var item in db.Teams)
                 {
-                    lt.Add(new Team() { TeamName = item.TeamName, City = item.City, Id = item.Id });
+                    models.Add(new Team() { TeamName = item.TeamName, City = item.City, Id = item.Id });
                 }              
-                return View(lt);
+                return View(models);
             }
         }
         public ActionResult MyPage()

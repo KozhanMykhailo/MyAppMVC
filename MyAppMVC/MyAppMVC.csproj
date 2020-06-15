@@ -138,6 +138,7 @@
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\TeamsRepositipy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -173,11 +174,16 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Custom\MyPage.cshtml" />
     <Content Include="Views\Custom\Index.cshtml" />
+    <Content Include="Views\Home\TeamsEdit.cshtml" />
+    <Content Include="Views\Home\EditRow.cshtml" />
+    <Content Include="Views\Home\DetailsRow.cshtml" />
+    <Content Include="Views\Home\SaveRow.cshtml" />
+    <Content Include="Views\Home\DeleteRow.cshtml" />
+    <Content Include="Views\Home\CreateRow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
