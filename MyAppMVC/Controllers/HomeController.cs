@@ -26,13 +26,13 @@ namespace MyAppMVC.Controllers
 			return View(TeamsRepositipy.GetTeamFromCollection(id));
 		}
 
-		public RedirectResult SaveRow(Team team)
+		public ActionResult SaveRow(Team team)
 		{
-			if (TeamsRepositipy.TeamsCollection.Contains(team))
+			if (TeamsRepositipy.TeamsCollection.Select(s=>s.Id).Contains(team.Id))
 				TeamsRepositipy.UpdateDataTeam(team);
 			else
 				TeamsRepositipy.CreateRow(team);
-			return Redirect("TeamsEdit");
+			return RedirectToAction("TeamsEdit");
 		}
 		public ActionResult DetailsRow(int id)
 		{
@@ -53,7 +53,10 @@ namespace MyAppMVC.Controllers
 
 		public ActionResult Contact()
 		{
-			ViewBag.Message = "Your contact page.";
+			ViewBag.Message1 = HttpContext.Request.Headers;
+			ViewBag.Message2 = HttpContext.Request.HttpMethod;
+			ViewBag.Message3 = HttpContext.Request.Url;
+			ViewBag.Message4 = HttpContext.CurrentHandler;
 			return View();
 		}
 
