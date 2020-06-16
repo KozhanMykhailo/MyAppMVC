@@ -1,6 +1,9 @@
 ﻿using MyAppMVC.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 
@@ -41,28 +44,34 @@ namespace MyAppMVC.Repository
 				team.TeamName = updTeam.TeamName;
 				team.City = updTeam.City;
 				team.Id = updTeam.Id;
+				SaveChangesInDB(updTeam, EntityState.Modified);
 			}
 		}
 
-		internal static void CreateRow(Team newTeam)
+		internal static bool CreateRow(Team newTeam)
 		{
-			if(newTeam == null)
+			if (newTeam == null)
 			{
-				return;
+				return false;
 			}
-			if(newTeam.Id == 0)
+			if (newTeam.Id == 0)
 			{
 				newTeam.Id = TeamsCollection.Max(m => m.Id) + 1;
 			}
-			if(TeamsCollection == null)
+			if (SaveChangesInDB(newTeam, EntityState.Added))
 			{
-				TeamsCollection = new List<Team>();
+				if (TeamsCollection == null)
+				{
+					TeamsCollection = new List<Team>();
+				}
 				TeamsCollection.Add(newTeam);
+				return true;
 			}
 			else
 			{
-				TeamsCollection.Add(newTeam);
+				return false;
 			}
+
 		}
 
 		public static void DeleteRow(int id)
@@ -70,7 +79,31 @@ namespace MyAppMVC.Repository
 			var delRow = GetTeamFromCollection(id);
 			if (delRow != null)
 			{
+				if(SaveChangesInDB(delRow, EntityState.Deleted))
 				TeamsCollection.Remove(delRow);
+			}
+		}
+		private static bool SaveChangesInDB(Team team, EntityState entityState)
+		{
+			using (MatchesContext db = new MatchesContext())
+			{
+				switch (entityState)
+				{
+					case EntityState.Added:
+						db.Entry<Team>(team).State = EntityState.Added;
+						break;
+					case EntityState.Modified:
+						db.Entry<Team>(team).State = EntityState.Modified;
+						break;
+					case EntityState.Deleted:
+						db.Entry<Team>(team).State = EntityState.Deleted;
+						break;
+					default: return false;
+				}
+				if (db.SaveChanges() > 0)
+					return true;
+				else
+					return false;
 			}
 		}
 	}

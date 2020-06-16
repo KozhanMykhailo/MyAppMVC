@@ -80,8 +80,5 @@ namespace MyAppMVC.Controllers
 			var result = await Task.Run(() => { Thread.Sleep(5000); return "Это пришло из async"; });
 			return View((object)result);
 		}
-
-
-
 	}
 }

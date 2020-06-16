@@ -15,5 +15,10 @@ namespace MyAppMVC.Models
         public DbSet<Team> Teams { get; set; }
         public DbSet<GemaPlayer> GemaPlayers { get; set; }
         public DbSet<Match> Matches { get; set; }
-    }		
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
+    }
+    
 }
