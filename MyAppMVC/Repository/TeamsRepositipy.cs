@@ -50,6 +50,10 @@ namespace MyAppMVC.Repository
 			{
 				return;
 			}
+			if(newTeam.Id == 0)
+			{
+				newTeam.Id = TeamsCollection.Max(m => m.Id) + 1;
+			}
 			if(TeamsCollection == null)
 			{
 				TeamsCollection = new List<Team>();

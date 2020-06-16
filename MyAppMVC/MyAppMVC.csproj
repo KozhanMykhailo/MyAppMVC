@@ -184,6 +184,7 @@
     <Content Include="Views\Home\SaveRow.cshtml" />
     <Content Include="Views\Home\DeleteRow.cshtml" />
     <Content Include="Views\Home\CreateRow.cshtml" />
+    <Content Include="Views\Home\AsynkAction.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

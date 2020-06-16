@@ -3,6 +3,8 @@ using MyAppMVC.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -36,7 +38,12 @@ namespace MyAppMVC.Controllers
 		}
 		public ActionResult DetailsRow(int id)
 		{
-			return View(TeamsRepositipy.GetTeamFromCollection(id));
+			var row = TeamsRepositipy.GetTeamFromCollection(id);
+			if(row == null)
+			{
+				return HttpNotFound();
+			}
+			return View(row);
 		}
 
 		public ActionResult DeleteRow(int id)
@@ -46,6 +53,7 @@ namespace MyAppMVC.Controllers
 			//Redirect("/") возвращает на роут по умолчанию
 		}
 
+		[HttpGet]
 		public ActionResult CreateRow()
 		{
 			return View();
@@ -57,8 +65,23 @@ namespace MyAppMVC.Controllers
 			ViewBag.Message2 = HttpContext.Request.HttpMethod;
 			ViewBag.Message3 = HttpContext.Request.Url;
 			ViewBag.Message4 = HttpContext.CurrentHandler;
-			return View();
+			return new HttpStatusCodeResult(System.Net.HttpStatusCode.Forbidden);
 		}
+
+		// вот таким образом deadblock возникать не будет!!!!!!!
+		// Тут 2 примера , не принимайте за мусор
+		//public async Task<string> RunNewTask()
+		//{
+		//	return await Task.Run(() => { Thread.Sleep(5000); return "Это пришло из async"; });
+		//}
+		public async Task<ActionResult> AsynkAction()
+		{
+			//var result = await RunNewTask();
+			var result = await Task.Run(() => { Thread.Sleep(5000); return "Это пришло из async"; });
+			return View((object)result);
+		}
+
+
 
 	}
 }
